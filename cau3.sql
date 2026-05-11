@@ -21,7 +21,7 @@ create table Price_Changes_Log (
     new_price decimal(18, 2) not null,
     price_status varchar(20) not null,
     difference decimal(18, 2),
-	 create_at datetime default current_timestamp
+	create_at datetime default current_timestamp
 );
 
 -- thời điểm kích hoạt Trigger chắc chắn là phải trước khi update thì mới có thể chặn đc giá âm
