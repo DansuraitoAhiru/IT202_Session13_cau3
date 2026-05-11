@@ -23,7 +23,7 @@ create table Price_Changes_Log (
     difference decimal(18, 2)
 );
 
--- thời điểm kích hoạt Trigger chắc chắn là phải sau khi update thì mới có thông tin mới sau khi update để lưu
+-- thời điểm kích hoạt Trigger chắc chắn là phải trước khi update thì mới có thể chặn đc giá âm
 -- luồng:
 -- ktra giá mới nhập có <= 0, nếu có thì chặn và hiện thông báo lỗi
 -- else thì sẽ bắt đầu kiểm tra xem nếu giá mới có > giá cũ thì chèn thông tin vào bảng Log với status_price là 'Tăng giá' và lấy độ chênh lệch = giá mới - giá cũ
@@ -33,7 +33,7 @@ create table Price_Changes_Log (
 -- code
 delimiter //
 create trigger saveLog
-after update on Medicines
+before update on Medicines
 for each row
 begin
     if New.price <= 0 then
